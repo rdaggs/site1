@@ -1,88 +1,1127 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-        
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conspiracy Entertainment</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <style>
-        :root {
-            --pink: #FF00FF;
-            --black: #000;
-        }
+  :root {
+    --metal-dark: #1a1a1a;
+    --metal-mid: #2e2e2e;
+    --metal-light: #4a4a4a;
+    --metal-shine: #6e6e6e;
+    --metal-highlight: #8a8a8a;
+    --metal-chrome: #c0c0c0;
+    --panel-bg: #111111;
+    --panel-inner: #0d0d0d;
+    --yellow-hazard: #f5c000;
+    --yellow-dim: #c49a00;
+    --red-light: #cc2200;
+    --red-glow: #ff3300;
+    --green-active: #44cc00;
+    --blue-link: #4488ff;
+    --cyan-accent: #00ccee;
+    --orange-label: #ff8800;
+    --text-main: #cccccc;
+    --text-dim: #888888;
+    --text-bright: #eeeeee;
+    --border-metal: #555555;
+    --border-dark: #333333;
+    --screw-color: #777;
+  }
 
-        body {
-            color: var(--pink);
-            background-color: var(--black);
-        }
+  body {
+    background: #000;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+    overflow-x: hidden;
+  }
 
-        a {
-            color: var(--pink);
+  /* ===== OUTER FRAME ===== */
+  .outer-frame {
+    width: 100%;
+    max-width: 980px;
+    background: linear-gradient(135deg, #3a3a3a 0%, #222 40%, #2a2a2a 60%, #1a1a1a 100%);
+    border: 3px solid #555;
+    border-radius: 4px;
+    position: relative;
+    padding: 8px;
+    box-shadow:
+      inset 0 0 30px rgba(0,0,0,0.8),
+      0 0 40px rgba(0,0,0,0.9),
+      inset 2px 2px 0 #666,
+      inset -2px -2px 0 #111;
+  }
 
-        }
+  /* Corner screws */
+  .screw {
+    position: absolute;
+    width: 16px; height: 16px;
+    background: radial-gradient(circle at 35% 35%, #aaa 0%, #666 40%, #333 80%);
+    border-radius: 50%;
+    border: 1px solid #444;
+    z-index: 10;
+  }
+  .screw::after {
+    content: '+';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: #444;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  .screw-tl { top: 6px; left: 6px; }
+  .screw-tr { top: 6px; right: 6px; }
+  .screw-bl { bottom: 6px; left: 6px; }
+  .screw-br { bottom: 6px; right: 6px; }
 
-        .nav-list {
-            font-size: 1.0rem;
-            text-align: center;
-        }
+  /* ===== HAZARD STRIPES ===== */
+  .hazard-stripe {
+    height: 12px;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--yellow-hazard) 0px,
+      var(--yellow-hazard) 10px,
+      #111 10px,
+      #111 20px
+    );
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #222;
+  }
 
-        .nav-list a {
-            display: block;
-        }
-    </style>
+  /* ===== HEADER AREA ===== */
+  .site-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+    border-bottom: 2px solid #444;
+    position: relative;
+  }
+
+  .header-banner {
+    flex: 1;
+    background: linear-gradient(180deg, #222 0%, #111 100%);
+    border: 2px solid #444;
+    border-radius: 3px;
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: inset 0 1px 0 #555, inset 0 -1px 0 #111;
+  }
+  .header-banner .hosted-by {
+    font-size: 9px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+  .header-banner .mt-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #aaa;
+    letter-spacing: 1px;
+  }
+  .header-banner .mt-logo span {
+    color: var(--metal-chrome);
+    font-weight: 900;
+  }
+
+  .logo-center {
+    text-align: center;
+    padding: 4px 12px;
+    background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+    border: 2px solid #555;
+    border-radius: 3px;
+    min-width: 130px;
+  }
+  .logo-center .logo-img {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(ellipse, #333 0%, #111 100%);
+    border: 1px solid #444;
+    border-radius: 2px;
+    margin: 0 auto 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    filter: drop-shadow(0 0 8px rgba(200,200,200,0.3));
+  }
+  .logo-center .site-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 8px;
+    color: #888;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ===== RED LIGHT BAR ===== */
+  .light-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    background: linear-gradient(180deg, #1a1a1a, #111);
+    border-bottom: 1px solid #333;
+  }
+  .indicator-light {
+    width: 22px; height: 14px;
+    background: radial-gradient(ellipse at 40% 35%, #ff5533 0%, var(--red-light) 50%, #880000 100%);
+    border-radius: 3px;
+    border: 1px solid #440000;
+    box-shadow: 0 0 6px rgba(255,50,0,0.6), inset 0 1px 0 rgba(255,100,50,0.4);
+    position: relative;
+  }
+  .indicator-light.dim {
+    background: radial-gradient(ellipse at 40% 35%, #882200 0%, #441100 100%);
+    box-shadow: none;
+  }
+  .indicator-light.active {
+    animation: blink 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes blink {
+    0% { box-shadow: 0 0 6px rgba(255,50,0,0.6); }
+    100% { box-shadow: 0 0 14px rgba(255,80,0,1), 0 0 25px rgba(255,50,0,0.5); }
+  }
+  .light-cross {
+    width: 22px; height: 14px;
+    background: radial-gradient(ellipse at 40% 35%, #ff2200 0%, #880000 100%);
+    border-radius: 2px;
+    border: 1px solid #440000;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #ff6644; font-weight: bold;
+    box-shadow: 0 0 8px rgba(255,30,0,0.7);
+  }
+
+  /* ===== MAIN LAYOUT ===== */
+  .main-layout {
+    display: grid;
+    grid-template-columns: 145px 1fr 175px;
+    gap: 0;
+    background: #0a0a0a;
+    min-height: 600px;
+  }
+
+  /* ===== LEFT NAV ===== */
+  .left-nav {
+    background: linear-gradient(180deg, #1c1c1c, #141414);
+    border-right: 2px solid #333;
+    padding: 8px 6px;
+  }
+
+  .nav-section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--metal-chrome);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 4px 3px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 4px;
+    text-shadow: 0 0 8px rgba(200,200,200,0.3);
+  }
+
+  .nav-links {
+    list-style: none;
+    margin-bottom: 10px;
+  }
+  .nav-links li {
+    padding: 2px 0;
+  }
+  .nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 10px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 4px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-links a:hover {
+    color: var(--yellow-hazard);
+    background: rgba(255,200,0,0.07);
+  }
+  .nav-bullet {
+    width: 6px; height: 6px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .nav-bullet.red { background: var(--red-light); border-radius: 50%; }
+  .nav-bullet.green { background: var(--green-active); border-radius: 50%; }
+  .nav-bullet.blue { background: var(--blue-link); border-radius: 50%; }
+  .nav-bullet.yellow { background: var(--yellow-hazard); border-radius: 50%; }
+  .nav-bullet.orange { background: var(--orange-label); border-radius: 50%; }
+
+  /* ===== SIDE COLUMN HARDWARE ===== */
+  .left-hardware {
+    position: relative;
+  }
+  .left-hardware .red-button {
+    width: 18px; height: 36px;
+    background: radial-gradient(ellipse at 40% 30%, #ff3300 0%, #aa1100 60%, #660000 100%);
+    border: 1px solid #440000;
+    border-radius: 3px;
+    margin: 12px auto;
+    display: block;
+    box-shadow: 0 0 10px rgba(255,50,0,0.5), inset 0 1px 0 rgba(255,100,50,0.3);
+  }
+
+  /* ===== CENTER CONTENT ===== */
+  .center-content {
+    background: #0e0e0e;
+    border-left: 1px solid #2a2a2a;
+    border-right: 1px solid #2a2a2a;
+  }
+
+  /* Breadcrumb / Hero banner */
+  .hero-banner {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    padding: 0;
+    border-bottom: 2px solid #333;
+    position: relative;
+    height: 80px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .hero-bg-text {
+    position: absolute;
+    font-family: 'Orbitron', monospace;
+    font-size: 52px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+  .hero-main-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 28px;
+    font-weight: 900;
+    color: #ddd;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(200,200,200,0.2), 2px 2px 0 #000;
+    padding-left: 16px;
+    z-index: 1;
+  }
+  .hero-subtitle {
+    font-size: 10px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding-left: 16px;
+    margin-top: 2px;
+    z-index: 1;
+  }
+  .hero-text-wrap { z-index: 1; }
+
+  /* Tab nav */
+  .tab-nav {
+    display: flex;
+    gap: 2px;
+    padding: 4px 8px;
+    background: #111;
+    border-bottom: 2px solid #2a2a2a;
+  }
+  .tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+    border: 1px solid #444;
+    border-radius: 2px;
+    color: #999;
+    font-size: 10px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover, .tab-btn.active {
+    background: linear-gradient(180deg, #3a3a3a, #222);
+    color: var(--yellow-hazard);
+    border-color: #666;
+  }
+  .tab-arrow {
+    width: 0; height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 6px solid currentColor;
+  }
+  .tab-btn.news .tab-arrow { color: var(--red-light); }
+  .tab-btn.updates .tab-arrow { color: var(--green-active); }
+  .tab-btn.launch .tab-arrow { color: var(--orange-label); }
+  .tab-btn.press .tab-arrow { color: var(--cyan-accent); }
+  .tab-btn.in .tab-arrow { color: var(--blue-link); }
+
+  /* Content panels */
+  .content-panels {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  /* News cards left column */
+  .news-cards { display: flex; flex-direction: column; gap: 8px; }
+
+  .news-card {
+    background: linear-gradient(180deg, #1a1a1a, #111);
+    border: 1px solid #333;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .news-card-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    background: linear-gradient(90deg, #222, #1a1a1a);
+    border-bottom: 1px solid #333;
+  }
+  .news-card-header .card-icon {
+    width: 10px; height: 10px;
+    background: var(--yellow-hazard);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    flex-shrink: 0;
+  }
+  .news-card-header .card-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 8px;
+    color: var(--yellow-hazard);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .news-card-body { padding: 8px; }
+  .news-card-date {
+    font-size: 9px;
+    color: var(--yellow-dim);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .news-card-text {
+    font-size: 9px;
+    color: #888;
+    line-height: 1.5;
+    font-family: 'Exo 2', sans-serif;
+    margin-bottom: 6px;
+  }
+  .news-card-text .open-link {
+    color: var(--yellow-hazard);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .news-card-images {
+    display: flex;
+    gap: 4px;
+  }
+  .card-thumb {
+    flex: 1;
+    height: 52px;
+    background: linear-gradient(135deg, #2a2a2a, #111);
+    border: 1px solid #333;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    overflow: hidden;
+  }
+
+  /* Right article column */
+  .article-column { display: flex; flex-direction: column; gap: 10px; }
+
+  .article-section {
+    background: linear-gradient(180deg, #161616, #0e0e0e);
+    border: 1px solid #2a2a2a;
+    border-radius: 2px;
+  }
+  .article-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-bottom: 1px solid #2a2a2a;
+    background: #141414;
+  }
+  .article-label-icon {
+    width: 12px; height: 12px;
+    background: var(--yellow-hazard);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    flex-shrink: 0;
+  }
+  .article-label-icon.blue-icon {
+    background: var(--cyan-accent);
+    clip-path: none;
+    border-radius: 50%;
+  }
+  .article-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .article-title .highlight { color: var(--yellow-hazard); }
+  .article-title .blue-hl { color: var(--cyan-accent); }
+
+  .article-body {
+    padding: 8px 10px;
+    font-size: 11px;
+    color: #999;
+    font-family: 'Exo 2', sans-serif;
+    line-height: 1.6;
+    max-height: 90px;
+    overflow: hidden;
+    mask-image: linear-gradient(180deg, #000 60%, transparent 100%);
+  }
+  .article-images {
+    display: flex;
+    gap: 5px;
+    padding: 6px 10px 8px;
+  }
+  .article-thumb {
+    flex: 1;
+    height: 68px;
+    background: linear-gradient(135deg, #2a2a2a, #111);
+    border: 1px solid #333;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    overflow: hidden;
+    position: relative;
+  }
+  .article-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 60%, rgba(0,0,0,0.5));
+  }
+
+  /* ===== RIGHT SIDEBAR ===== */
+  .right-sidebar {
+    background: linear-gradient(180deg, #1a1a1a, #111);
+    border-left: 2px solid #2a2a2a;
+    padding: 8px 6px;
+  }
+
+  .sidebar-panel {
+    background: #0e0e0e;
+    border: 1px solid #2a2a2a;
+    border-radius: 2px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  .sidebar-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 7px;
+    background: linear-gradient(90deg, #1e1e1e, #141414);
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .sidebar-panel-header .ph-icon {
+    width: 8px; height: 8px;
+    background: var(--yellow-hazard);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    flex-shrink: 0;
+  }
+  .sidebar-panel-header .ph-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 8px;
+    color: var(--yellow-hazard);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .sidebar-panel-header .ph-title .ph-accent { color: #fff; margin-left: 3px; }
+
+  .sidebar-news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 5px 7px;
+    border-bottom: 1px solid #1a1a1a;
+    cursor: pointer;
+  }
+  .sidebar-news-item:hover { background: rgba(255,200,0,0.04); }
+  .sidebar-news-item .sni-icon {
+    width: 8px; height: 8px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .sidebar-news-item .sni-icon.tri {
+    background: var(--yellow-hazard);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  }
+  .sidebar-news-item .sni-icon.dash {
+    background: #555;
+    height: 2px;
+    margin-top: 5px;
+    border-radius: 1px;
+  }
+  .sidebar-news-item .sni-text {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 9px;
+    color: #888;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .sidebar-news-item.active .sni-text { color: #bbb; }
+
+  /* Deactivated panel */
+  .deactivated-panel {
+    background: #0a0a0a;
+    border: 1px solid #222;
+    padding: 8px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .deactivated-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    color: #444;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid #333;
+    padding: 4px 8px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .deactivated-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .deact-cell {
+    height: 10px;
+    background: #1a1a1a;
+    border: 1px solid #222;
+  }
+  .deact-cell.lit { background: #2a3a2a; border-color: #334433; }
+
+  /* ===== FOOTER BAR ===== */
+  .footer-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    padding: 6px 8px;
+    background: linear-gradient(180deg, #1a1a1a, #111);
+    border-top: 2px solid #333;
+  }
+  .footer-section {
+    background: #0d0d0d;
+    border: 1px solid #2a2a2a;
+    border-radius: 2px;
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .footer-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 8px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    flex: 1;
+  }
+  .footer-label .dot { color: #333; }
+  .footer-input {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #888;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    padding: 3px 6px;
+    flex: 1;
+    outline: none;
+  }
+  .footer-input:focus { border-color: #555; color: #aaa; }
+  .footer-btn {
+    background: linear-gradient(180deg, #333 0%, #1a1a1a 100%);
+    border: 1px solid #555;
+    color: var(--yellow-hazard);
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.15s;
+  }
+  .footer-btn:hover {
+    background: linear-gradient(180deg, #444, #2a2a2a);
+    color: #fff;
+    border-color: var(--yellow-hazard);
+  }
+  .footer-btn.search-btn { color: var(--orange-label); }
+
+  /* Metal panel texture overlays */
+  .metal-panel {
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 3px,
+        rgba(255,255,255,0.012) 3px,
+        rgba(255,255,255,0.012) 4px
+      ),
+      linear-gradient(180deg, #2a2a2a 0%, #1c1c1c 50%, #222 100%);
+  }
+
+  /* Bolt accents */
+  .bolt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 8px;
+  }
+  .bolt {
+    width: 8px; height: 8px;
+    background: radial-gradient(circle at 35% 35%, #888 0%, #444 60%);
+    border-radius: 50%;
+    border: 1px solid #333;
+  }
+
+  /* Side column decorative panels */
+  .side-deco-box {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #2a2a2a, #111);
+    border: 2px solid #333;
+    border-radius: 3px;
+    margin: 8px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
+  }
+  .side-deco-inner {
+    width: 24px; height: 24px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 2px;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-lr;
+    font-family: 'Orbitron', monospace;
+    font-size: 8px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    padding: 8px 2px;
+  }
+
+  /* Scroll shimmer effect on certain elements */
+  @keyframes shimmer {
+    0% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.4; }
+  }
+  .shimmer { animation: shimmer 3s ease-in-out infinite; }
+
+  /* Extra side columns */
+  .page-layout {
+    display: grid;
+    grid-template-columns: 22px 1fr 22px;
+    gap: 0;
+  }
+  .side-column {
+    background: linear-gradient(180deg, #2a2a2a, #1a1a1a, #222);
+    border: 1px solid #3a3a3a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+    gap: 4px;
+  }
+  .side-column.left { border-right: 2px solid #1a1a1a; }
+  .side-column.right { border-left: 2px solid #1a1a1a; }
+  .side-stripe {
+    width: 14px;
+    flex: 1;
+    background: repeating-linear-gradient(
+      0deg,
+      #222 0px, #222 4px,
+      #2a2a2a 4px, #2a2a2a 8px
+    );
+    margin: 2px 0;
+  }
+</style>
 </head>
-
 <body>
-    <main>
-        <h1>
-            Hi
-        </h1>
-        <h2>
-            Me
-        </h2>
-        <h3>
-            Me
-        </h3>
-        <h4>
-            Me
-        </h4>
-        <p>
-            Me
-        </p>
 
+<div class="outer-frame">
+  <div class="screw screw-tl"></div>
+  <div class="screw screw-tr"></div>
+  <div class="screw screw-bl"></div>
+  <div class="screw screw-br"></div>
 
-    </main>
-    <center>
-        <h1>website</h1>
-        <marquee>I Love You 5</marquee>
-        <hr width="80%">
-    </center>
+  <!-- Header -->
+  <div class="site-header">
+    <div class="header-banner">
+      <span class="hosted-by">Hosted By</span>
+      <span class="mt-logo"><span>(mt)</span> .mediatemple</span>
+    </div>
 
-    <nav class="nav-list">
-        <a href="lists.html">Lists</a>
-        <a href="mywork.html">My work</a>
-        <a href="thebasement.html">Basement</a>
-    </nav>
+    <div class="logo-center">
+      <div class="logo-img">🛸</div>
+      <div class="site-title">Conspiracy<br>Entertainment</div>
+    </div>
 
+    <div class="header-banner" style="justify-content: flex-end;">
+      <span style="font-family: Orbitron,monospace;font-size:10px;color:#555;letter-spacing:3px;text-transform:uppercase;">Systems Online</span>
+    </div>
+  </div>
 
+  <div class="hazard-stripe"></div>
 
+  <!-- Red light bar -->
+  <div class="light-bar">
+    <div class="indicator-light dim"></div>
+    <div class="indicator-light active"></div>
+    <div class="indicator-light active"></div>
+    <div class="light-cross">✛</div>
+    <div class="indicator-light active"></div>
+    <div class="light-cross">✛</div>
+    <div class="indicator-light dim"></div>
+    <div class="indicator-light active"></div>
+    <div class="indicator-light active"></div>
+    <div class="light-cross">✛</div>
+    <div class="indicator-light active"></div>
+    <div class="indicator-light dim"></div>
+    <div class="indicator-light active"></div>
+  </div>
+
+  <!-- Page layout with outer side columns -->
+  <div class="page-layout">
+
+    <!-- Left outer column -->
+    <div class="side-column left">
+      <div class="side-deco-box"><div class="side-deco-inner"></div></div>
+      <div class="hazard-stripe" style="width:14px;height:50px;writing-mode:vertical-lr;background:repeating-linear-gradient(0deg,#f5c000 0,#f5c000 8px,#111 8px,#111 16px);border:none;"></div>
+      <div class="side-stripe"></div>
+      <div style="width:16px;height:20px;background:radial-gradient(ellipse at 40% 30%,#ff3300,#880000);border-radius:3px;border:1px solid #440000;box-shadow:0 0 8px rgba(255,50,0,0.5);"></div>
+      <div class="side-stripe"></div>
+      <div class="hazard-stripe" style="width:14px;height:50px;writing-mode:vertical-lr;background:repeating-linear-gradient(0deg,#f5c000 0,#f5c000 8px,#111 8px,#111 16px);border:none;"></div>
+      <div class="side-deco-box"><div class="side-deco-inner"></div></div>
+    </div>
+
+    <!-- Main content -->
+    <div>
+      <div class="main-layout">
+
+        <!-- Left Nav -->
+        <div class="left-nav">
+          <div class="nav-section-title">News</div>
+          <ul class="nav-links">
+            <li><a href="#"><span class="nav-bullet red"></span>News</a></li>
+            <li><a href="#"><span class="nav-bullet red"></span>Updates</a></li>
+            <li><a href="#"><span class="nav-bullet red"></span>Launch Dates</a></li>
+            <li><a href="#"><span class="nav-bullet red"></span>Press Arena</a></li>
+            <li><a href="#"><span class="nav-bullet red"></span>In the Press</a></li>
+          </ul>
+
+          <div class="nav-section-title">Games</div>
+          <ul class="nav-links">
+            <li><a href="#"><span class="nav-bullet green"></span>Spotlights</a></li>
+            <li><a href="#"><span class="nav-bullet green"></span>Platform</a></li>
+            <li><a href="#"><span class="nav-bullet green"></span>Genre</a></li>
+            <li><a href="#"><span class="nav-bullet green"></span>All Games</a></li>
+            <li><a href="#"><span class="nav-bullet green"></span>Search</a></li>
+          </ul>
+
+          <div class="nav-section-title">About</div>
+          <ul class="nav-links">
+            <li><a href="#"><span class="nav-bullet blue"></span>Overview</a></li>
+            <li><a href="#"><span class="nav-bullet blue"></span>History</a></li>
+            <li><a href="#"><span class="nav-bullet blue"></span>Employment</a></li>
+            <li><a href="#"><span class="nav-bullet blue"></span>Contacts</a></li>
+            <li><a href="#"><span class="nav-bullet yellow"></span>Legal</a></li>
+          </ul>
+
+          <div class="nav-section-title">Support</div>
+          <ul class="nav-links">
+            <li><a href="#"><span class="nav-bullet green"></span>Support</a></li>
+          </ul>
+
+          <div class="nav-section-title">Corp</div>
+          <ul class="nav-links">
+            <li><a href="#"><span class="nav-bullet orange"></span>Investor</a></li>
+            <li><a href="#"><span class="nav-bullet orange"></span>Press</a></li>
+            <li><a href="#"><span class="nav-bullet orange"></span>Distributor</a></li>
+          </ul>
+        </div>
+
+        <!-- Center Content -->
+        <div class="center-content">
+          <!-- Hero -->
+          <div class="hero-banner">
+            <div class="hero-bg-text">NEWS ARENA</div>
+            <div class="hero-text-wrap">
+              <div class="hero-main-title">News Arena</div>
+              <div class="hero-subtitle">World &nbsp;·&nbsp; News Arena &nbsp;·&nbsp; Conspiracy &nbsp;·&nbsp; 01</div>
+            </div>
+          </div>
+
+          <!-- Tab nav -->
+          <div class="tab-nav">
+            <button class="tab-btn news active"><span class="tab-arrow"></span> News</button>
+            <button class="tab-btn updates"><span class="tab-arrow"></span> Updates</button>
+            <button class="tab-btn launch"><span class="tab-arrow"></span> Launch</button>
+            <button class="tab-btn press"><span class="tab-arrow"></span> Press</button>
+            <button class="tab-btn in"><span class="tab-arrow"></span> In</button>
+          </div>
+
+          <!-- Content panels -->
+          <div class="content-panels">
+
+            <!-- Left news cards -->
+            <div class="news-cards">
+
+              <!-- Card 1 -->
+              <div class="news-card">
+                <div class="news-card-header">
+                  <div class="card-icon"></div>
+                  <span class="card-title">ConspiracyGames.com</span>
+                </div>
+                <div class="news-card-body">
+                  <div class="news-card-date">11 · July · 2002</div>
+                  <p class="news-card-text">Conspiracy Entertainment is proud to present our new revolutionary website. You can find a mult... <a href="#" class="open-link">⊕ Open</a></p>
+                  <div class="news-card-images">
+                    <div class="card-thumb">👽</div>
+                    <div class="card-thumb" style="filter:grayscale(0.5)">🤖</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="news-card">
+                <div class="news-card-header">
+                  <div class="card-icon"></div>
+                  <span class="card-title">Flagship Xbox <span style="color:#ff8800">2002</span></span>
+                </div>
+                <div class="news-card-body">
+                  <div class="news-card-date">01 · May · 2002</div>
+                  <p class="news-card-text">This summer, Enclave will arrive as the Xbox's most stunning title yet. Awesome graphics and game... <a href="#" class="open-link">⊕ Open</a></p>
+                  <div class="news-card-images">
+                    <div class="card-thumb">⚔️</div>
+                    <div class="card-thumb">🧝</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="news-card">
+                <div class="news-card-header">
+                  <div class="card-icon" style="background:var(--red-light)"></div>
+                  <span class="card-title">Tiny Toons <span style="color:#ff4444;animation:blink 1s infinite alternate;display:inline-block">Announced</span></span>
+                </div>
+                <div class="news-card-body">
+                  <div class="news-card-date">01 · May · 2002</div>
+                  <p class="news-card-text">The long awaited Tiny Toons title has been announced, "Tiny Toons Defenders of the Looniverse" and... <a href="#" class="open-link">⊕ Open</a></p>
+                  <div class="news-card-images">
+                    <div class="card-thumb">🐰</div>
+                    <div class="card-thumb">🦆</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right article column -->
+            <div class="article-column">
+
+              <!-- Article 1 -->
+              <div class="article-section">
+                <div class="article-header">
+                  <div class="article-label-icon"></div>
+                  <div class="article-title">
+                    <span style="color:#aaa">ConspiracyGames.com</span> <span class="highlight">Launches</span>
+                  </div>
+                </div>
+                <div class="article-body">
+                  Conspiracy Entertainment is proud to present our new revolutionary website. You can find a multitude of games, Facts, reviews, hints and tips, as well as information concerning Conspiracy Entertainment, a support section, a limited access corporate area and much more. The site will be updated regularly.
+                </div>
+                <div class="article-images">
+                  <div class="article-thumb">📜</div>
+                  <div class="article-thumb">🔵</div>
+                  <div class="article-thumb" style="background:linear-gradient(135deg,#3a1a1a,#1a0a0a)">🔴</div>
+                </div>
+              </div>
+
+              <!-- Article 2 -->
+              <div class="article-section">
+                <div class="article-header">
+                  <div class="article-label-icon blue-icon"></div>
+                  <div class="article-title">
+                    <span style="color:#aaa">Multimedia Mayhem and</span> <span class="blue-hl">3D Dynamics</span>
+                  </div>
+                </div>
+                <div class="article-body">
+                  "FI02" is our resident guide and house droid. It can help you find your way around this bunker as well as letting you know what the different features do. In the Game pods, watch out for the latest in video technology. You can view sneak clips of all our games as well as downloading images. At the bottom...
+                </div>
+                <div class="article-images">
+                  <div class="article-thumb">🌐</div>
+                  <div class="article-thumb">👾</div>
+                  <div class="article-thumb">🗺️</div>
+                </div>
+              </div>
+
+              <!-- Article 3 -->
+              <div class="article-section">
+                <div class="article-header">
+                  <div class="article-label-icon" style="background:var(--cyan-accent)"></div>
+                  <div class="article-title">
+                    <span style="color:#aaa">Fantasy Interfaces Develops</span> <span style="color:var(--orange-label)">The Cutting Edge</span>
+                  </div>
+                </div>
+                <div class="article-body">
+                  We teamed up with the world's premier Flash developers, <strong style="color:#ccc">Fantasy Interfaces</strong>. Over the course of 2 months FI designed, developed and produced Conspiracygames.com, giving Conspiracy Entertainment one of the most advanced and sophisticated websites of today. With a massive...
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+
+          <div class="sidebar-panel">
+            <div class="sidebar-panel-header">
+              <div class="ph-icon"></div>
+              <div class="ph-title">Conspiracy News <span class="ph-accent">Archive</span></div>
+            </div>
+            <div class="sidebar-news-item active">
+              <div class="sni-icon tri"></div>
+              <div class="sni-text">Official Site Launch</div>
+            </div>
+            <div class="sidebar-news-item active">
+              <div class="sni-icon tri"></div>
+              <div class="sni-text">Xbox has a new flagship</div>
+            </div>
+            <div class="sidebar-news-item">
+              <div class="sni-icon tri"></div>
+              <div class="sni-text">Tiny Toons Title Announced</div>
+            </div>
+            <div class="sidebar-news-item">
+              <div class="sni-icon dash"></div>
+              <div class="sni-text" style="color:#333">Empty:</div>
+            </div>
+            <div class="sidebar-news-item">
+              <div class="sni-icon dash"></div>
+              <div class="sni-text" style="color:#333">Empty:</div>
+            </div>
+            <div class="sidebar-news-item">
+              <div class="sni-icon dash"></div>
+              <div class="sni-text" style="color:#333">Empty:</div>
+            </div>
+          </div>
+
+          <!-- Deactivated panel -->
+          <div class="deactivated-panel">
+            <div class="deactivated-label">Deactivated</div>
+            <div class="deactivated-grid">
+              <div class="deact-cell"></div>
+              <div class="deact-cell lit"></div>
+              <div class="deact-cell"></div>
+              <div class="deact-cell lit"></div>
+              <div class="deact-cell"></div>
+              <div class="deact-cell lit"></div>
+              <div class="deact-cell"></div>
+              <div class="deact-cell"></div>
+              <div class="deact-cell"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Right outer column -->
+    <div class="side-column right">
+      <div class="side-deco-box"><div class="side-deco-inner"></div></div>
+      <div class="hazard-stripe" style="width:14px;height:50px;writing-mode:vertical-lr;background:repeating-linear-gradient(0deg,#f5c000 0,#f5c000 8px,#111 8px,#111 16px);border:none;"></div>
+      <div class="side-stripe"></div>
+      <div style="width:16px;height:20px;background:radial-gradient(ellipse at 40% 30%,#ff3300,#880000);border-radius:3px;border:1px solid #440000;box-shadow:0 0 8px rgba(255,50,0,0.5);"></div>
+      <div class="side-stripe"></div>
+      <div class="hazard-stripe" style="width:14px;height:50px;writing-mode:vertical-lr;background:repeating-linear-gradient(0deg,#f5c000 0,#f5c000 8px,#111 8px,#111 16px);border:none;"></div>
+      <div class="side-deco-box"><div class="side-deco-inner"></div></div>
+    </div>
+
+  </div>
+
+  <div class="hazard-stripe"></div>
+
+  <!-- Footer bar -->
+  <div class="footer-bar">
+    <div class="footer-section">
+      <div class="footer-label">Quick <span class="dot">·</span> Access <span class="dot">·</span> Section</div>
+      <button class="footer-btn">Go!</button>
+      <button class="footer-btn" style="color:#888">Help</button>
+    </div>
+    <div class="footer-section" style="justify-content:center;">
+      <div class="footer-label" style="text-align:center;">&lt; Quick <span class="dot">·</span> Search &gt;</div>
+      <input class="footer-input" type="text" placeholder="search...">
+    </div>
+    <div class="footer-section" style="justify-content:flex-end;">
+      <div class="footer-label" style="text-align:right;">Search <span class="dot">·</span> Game <span class="dot">·</span> Section</div>
+      <button class="footer-btn search-btn">Search</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Randomize a few light blink timings
+  document.querySelectorAll('.indicator-light.active').forEach((light, i) => {
+    light.style.animationDelay = (i * 0.3) + 's';
+    light.style.animationDuration = (1.2 + Math.random() * 1.5) + 's';
+  });
+</script>
 </body>
-
-
-
-
-
-<center>
-    <br><br>
-    <blink>Building</blink>
-    <br><br>
-    <small>© 2026 My Cool Website</small>
-</center>
-
-<footer>hi</footer>
-
-</body>
-
 </html>
